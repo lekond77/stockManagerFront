@@ -1,0 +1,7 @@
+<div >
+    <ul *ngFor="let product of products">
+        <li>
+            <div class="color-primary"> {{ product.getReference() }} : {{ product.amount() }}</div>
+        </li>
+    </ul>
+</div>
