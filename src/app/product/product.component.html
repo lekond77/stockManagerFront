@@ -1,7 +1,51 @@
-<div >
-    <ul *ngFor="let product of products">
-        <li>
-            <div class="color-primary"> {{ product.getReference() }} : {{ product.amount() }}</div>
-        </li>
-    </ul>
+<div class="row">
+    <div class="col col-lg-8"> 
+        <table class="table table-striped border">
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Prix Unitaire</th>
+                    <th>Quantité</th>           
+                </tr>
+            </thead>
+            <tbody *ngFor="let product of products">
+                <tr>
+                    <td> {{ product.getReference() }} </td>
+                    <td> {{ product.getUnitPrice() }} </td>
+                    <td> {{ product.getQuantity() }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col col-lg-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white text-center">
+              Ajouter un produit
+            </div>
+            <div class="card-body"> 
+                <form formGroup="productForm">
+                    <div class="form-group mb-4">
+                        <label>Référence :</label>
+                        <input type="text" class="form-control" formControlName="reference"/>
+                    </div>
+                    <div class="alert alert-danger"  *ngIf="productForm.controls['reference'].invalid && 
+                        (productForm.controls['reference'].touched || productForm.controls['reference'].dirty)">
+                        La référence est obligatoire
+                    </div>
+                    <div class="form-group mb-4">
+                        <label>Prix unitaire :</label>
+                        <input type="number" class="form-control" formControlName="unitPrice"/>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label>Quantité :</label>
+                        <input type="number" class="form-control outline-0" formControlName="quantity"/>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success w-75" [disabled]="productForm.pristine || productForm.invalid">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+    </div>
+
 </div>

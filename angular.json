@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "stocmanager:build:production"
+              "buildTarget": "stocmanager:build:production"
             },
             "development": {
-              "browserTarget": "stocmanager:build:development"
+              "buildTarget": "stocmanager:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stocmanager:build"
+            "buildTarget": "stocmanager:build"
           }
         },
         "test": {
