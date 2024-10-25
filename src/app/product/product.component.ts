@@ -15,13 +15,12 @@ export class ProductComponent implements OnInit{
   constructor(private productService: ProductMockService, private formBulder: FormBuilder){
    
   }
-
   ngOnInit(): void {
     this.products = this.productService.getProducts();
     this.productForm = this.formBulder.group({
       reference: new FormControl('', Validators.required),
-      quantity: '',
-      unitPrice: ''
-    });
+      quantity: [''],
+      unitPrice: ['']
+    }); 
   }
 }

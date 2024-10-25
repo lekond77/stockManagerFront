@@ -1,4 +1,5 @@
 <div class="row">
+   <div><h2 class="text-center my-4 bg-body-secondary p-1">Produits</h2></div>
     <div class="col col-lg-8"> 
         <table class="table table-striped border">
             <thead>
@@ -23,18 +24,18 @@
               Ajouter un produit
             </div>
             <div class="card-body"> 
-                <form formGroup="productForm">
-                    <div class="form-group mb-4">
+                <form [formGroup]="productForm" >
+                    <div class="form-group">
                         <label>Référence :</label>
-                        <input type="text" class="form-control" formControlName="reference"/>
+                        <input type="text" class="form-control" formControlName="reference" id="reference"/>
                     </div>
-                    <div class="alert alert-danger"  *ngIf="productForm.controls['reference'].invalid && 
-                        (productForm.controls['reference'].touched || productForm.controls['reference'].dirty)">
+                    <div class="text-danger"  *ngIf="productForm.get('reference')?.invalid &&
+                        (productForm.get('reference')?.touched || productForm.get('reference')?.dirty)">
                         La référence est obligatoire
                     </div>
-                    <div class="form-group mb-4">
+                    <div class="form-group my-4">
                         <label>Prix unitaire :</label>
-                        <input type="number" class="form-control" formControlName="unitPrice"/>
+                        <input type="number" class="form-control" formControlName="unitPrice" id="unitPrice"/>
                     </div>
                     <div class="form-group mb-4">
                         <label>Quantité :</label>

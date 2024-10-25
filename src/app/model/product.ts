@@ -1,9 +1,6 @@
 export class Product{
 
     constructor(private reference:string, private quantity: number, private unitPrice:number){}
-  //  reference ! : string;
-    // quantity!: number;
-    // unitPrice!:number;
 
     public getReference():string{
         return this.reference;
