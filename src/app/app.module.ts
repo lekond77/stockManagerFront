@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { ProductComponent } from './product/product.component';
-import ProductMockService from './product/product.mock.service';
+import { ProductComponent } from './product/product.component';;
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContentComponent } from './content/content.component';
+import { ProductService } from './product/product.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -20,9 +21,10 @@ import { ContentComponent } from './content/content.component';
   imports: [
     BrowserModule, 
     AppRoutingModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [ProductMockService],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 
 })

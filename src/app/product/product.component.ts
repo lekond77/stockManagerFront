@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import ProductMockService from './product.mock.service';
 import { Product } from '../model/product';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'app-product',
@@ -10,13 +11,15 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class ProductComponent implements OnInit{
 
-  products!: Product[];
+  products$!: Observable<Product[]>;
   productForm!: FormGroup;
-  constructor(private productService: ProductMockService, private formBulder: FormBuilder){
+  constructor(private productService: ProductService, private formBulder: FormBuilder){
    
   }
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+
+    this.products$ = this.productService.getProducts();
+
     this.productForm = this.formBulder.group({
       reference: new FormControl('', Validators.required),
       quantity: [''],
