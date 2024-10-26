@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Product } from "../model/product";
@@ -21,11 +21,17 @@ export class ProductService{
     }
 
     addProduct(product : Product): Observable<Product>{
-        return this.http.post<Product>(API_URL + "/produit", product);
+        console.log("form add ");
+        return this.http.post<Product>(API_URL + "/produit", product, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
     }
 
     updateProduct(product : Product): Observable<Product>{
-        console.log(product);
+
+        
         return this.http.put<Product>(API_URL + `/produit/${product.id}`, product);
     }
 

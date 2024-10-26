@@ -51,6 +51,7 @@ export class ProductComponent implements OnInit{
   addProduct(){
     const product = this.productForm.value;
     this.productService.addProduct(product);
+    this.getProducts();
     this.initProduct();
     //console.log(this.getProducts()); // Update products view
   }
@@ -66,6 +67,10 @@ export class ProductComponent implements OnInit{
   initProduct(){
     this.selectedProduct = new Product();
     this.createForm();
+  }
+
+  onProductChange(){
+    this.actionText === 'Ajouter' ? this.addProduct() : this.updateProduct();
   }
  
 }
