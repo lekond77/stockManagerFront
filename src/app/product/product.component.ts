@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../model/product';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ProductService } from './product.service';
+import { Router } from '@angular/router';
+import { tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -12,30 +15,30 @@ import { ProductService } from './product.service';
 export class ProductComponent implements OnInit{
 
   products$!: Observable<Product[]>;
+  productPreview$!:Observable<Product>;
   productForm!: FormGroup;
   action:string = "add";
   actionText:string = "Ajouter";
+  modalStyle:string = "d-none";
 
   selectedProduct!:Product;
-  constructor(private productService: ProductService, private formBulder: FormBuilder){
+  constructor(private productService: ProductService, private formBulder: FormBuilder,  private router: Router){
    
   }
 
   ngOnInit(): void {
-    //
-    this.initProduct();
+
+    //Create new form with propreties values
+     this.initProduct();
 
     //Get all products
     this.getProducts();
 
-    //product form
-    this.createForm();
    
   }
-  
 
+    //form to add or update  product
   createForm(){
-     //form to add new product
      this.productForm = this.formBulder.group({
       reference: new FormControl('', Validators.required),
       quantity: [''],
@@ -47,21 +50,56 @@ export class ProductComponent implements OnInit{
     this.actionText = action === 'add'? 'Ajouter' : 'Modifier';
   }
 
-  //Add new product
-  addProduct(){
-    const product = this.productForm.value;
-    this.productService.addProduct(product);
-    this.getProducts();
-    this.initProduct();
-    //console.log(this.getProducts()); // Update products view
+  onProductChange(){
+    this.actionText === 'Ajouter' ? this.addProduct() : this.updateProduct();
   }
 
   getProducts(){
     this.products$ = this.productService.getProducts();
   }
 
+  addProduct() {
+    this.productService.addProduct(this.productForm.value).pipe(
+      tap((response) => {
+        this.products$ = this.products$.pipe(
+          map(products => [...products])
+        );
+        this.initProduct(); // Réinitialise le formulaire
+      }),
+      catchError((error) => {
+        return of(null); 
+      })
+    ).subscribe();
+  }
+
   updateProduct(){
-    this.productService.updateProduct(this.selectedProduct);
+    this.productService.updateProduct(this.selectedProduct).pipe(
+      tap((response) =>{
+        this.products$ = this.products$.pipe(
+          map(products => [...products])
+        );
+        this.initProduct();
+      }),
+      catchError((error) =>{
+        return of (null);
+      })
+    ).subscribe();
+  }
+
+  deleteProduct(productId: number){
+    this.productService.deleteProduct(productId).pipe(
+      tap((response) =>{
+        this.products$ = this.products$.pipe(
+          map(products => [...products])
+        )
+      })
+    ).subscribe();
+  }
+
+
+  getProduct(productId: number){
+    this.productPreview$ = this.productService.getProduct(productId);
+    this.modalStyle = "d-block";
   }
 
   initProduct(){
@@ -69,8 +107,8 @@ export class ProductComponent implements OnInit{
     this.createForm();
   }
 
-  onProductChange(){
-    this.actionText === 'Ajouter' ? this.addProduct() : this.updateProduct();
+  onProductPreviewClose(){
+    this.modalStyle = "d-none";
   }
- 
+
 }

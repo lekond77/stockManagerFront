@@ -17,11 +17,10 @@ export class ProductService{
     }
 
     getProduct(productId: number): Observable<Product> {
-        return this.http.get<Product>(API_URL + `/produit/${productId}`);
+        return this.http.get<Product>(API_URL + `/produits/${productId}`);
     }
 
     addProduct(product : Product): Observable<Product>{
-        console.log("form add ");
         return this.http.post<Product>(API_URL + "/produit", product, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -30,8 +29,6 @@ export class ProductService{
     }
 
     updateProduct(product : Product): Observable<Product>{
-
-        
         return this.http.put<Product>(API_URL + `/produit/${product.id}`, product);
     }
 
