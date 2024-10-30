@@ -1,0 +1,30 @@
+<div class="shadow-sm p-3 mb-4 col col-md-6">
+    <form [formGroup]="loginForm">
+        <div class="mt-2 mb-4">
+            <label for="email" class="form-label">Email address :</label>
+            <input type="email" class="form-control" id="email" formControlName="email">
+        </div>
+
+        <div class="my-4">
+            <label for="password" class="form-label">Password :</label>
+            <div class="input-group">
+                <input type="password" class="form-control"  id="password" name="password" required>
+                <button class="btn btn-info ms-1 rounded-0">Afficher</button>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mb-4 remembermeblock">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="_remember_me">
+                    Se souvenir de moi
+                </label>
+            </div>
+            <a href="/reset-password" class="ly-primary-color">Mot de passe oublié ?</a>
+        </div>
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn-outline-success btn mt-3 w-75 " value="Login">
+        </div>
+    </form>
+    
+</div>
