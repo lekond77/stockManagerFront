@@ -1,4 +1,4 @@
-<div class="shadow-sm p-3 mb-4 col col-md-6">
+<div class="shadow-sm p-3 mt-4 col col-md-6 mx-auto">
     <form [formGroup]="loginForm">
         <div class="mt-2 mb-4">
             <label for="email" class="form-label">Email address :</label>
@@ -23,7 +23,7 @@
             <a href="/reset-password" class="ly-primary-color">Mot de passe oublié ?</a>
         </div>
         <div class="d-flex justify-content-center">
-            <input type="submit" class="btn-outline-success btn mt-3 w-75 " value="Login">
+            <input type="submit" class="btn-outline-success btn mt-3 w-75" value="Login" (click)="onSubmitLoginForm()">
         </div>
     </form>
     

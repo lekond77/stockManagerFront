@@ -46,19 +46,18 @@ export class ProductComponent implements OnInit{
     });  
   }
 
-  onActionChange(action: 'edit'|'add' ){
+  onActionChange(action: 'edit'|'add' ): void{
     this.actionText = action === 'add'? 'Ajouter' : 'Modifier';
   }
 
-  onProductChange(){
-    this.actionText === 'Ajouter' ? this.addProduct() : this.updateProduct();
+  onProductChange(): void{
+    this.actionText === 'Ajouter' ? this.onButtonAddProductClick() : this.onButtonUpdateProduct();
   }
 
-  getProducts(){
+  getProducts(): void{
     this.products$ = this.productService.getProducts();
   }
-
-  addProduct() {
+  onButtonAddProductClick(): void{
     this.productService.addProduct(this.productForm.value).pipe(
       tap((response) => {
         this.products$ = this.products$.pipe(
@@ -72,7 +71,7 @@ export class ProductComponent implements OnInit{
     ).subscribe();
   }
 
-  updateProduct(){
+  onButtonUpdateProduct(): void{
     this.productService.updateProduct(this.selectedProduct).pipe(
       tap((response) =>{
         this.products$ = this.products$.pipe(
@@ -86,7 +85,7 @@ export class ProductComponent implements OnInit{
     ).subscribe();
   }
 
-  deleteProduct(productId: number){
+  onButtonDeleteProduct(productId: number): void{
     this.productService.deleteProduct(productId).pipe(
       tap((response) =>{
         this.products$ = this.products$.pipe(
