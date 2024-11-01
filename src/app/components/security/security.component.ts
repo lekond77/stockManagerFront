@@ -11,7 +11,10 @@ import { tap } from 'rxjs/operators';
 export class SecurityComponent implements OnInit{
 
   loginForm!:FormGroup;
+  isPasswordVisible: boolean = false;
+
   constructor(private formBuilder: FormBuilder, private authenService: AuthenticationService){}
+
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -20,13 +23,16 @@ export class SecurityComponent implements OnInit{
     })
   }
 
+  onTogglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
   onSubmitLoginForm():void{
     this.authenService.login(this.loginForm.value).pipe(
       tap( (r) => {
         console.log(r );
       })
     ).subscribe();
-
   }
 
 }
