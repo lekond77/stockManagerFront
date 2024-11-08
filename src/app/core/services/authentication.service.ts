@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { API_URL } from "../config/api.url.config";
@@ -16,10 +16,13 @@ export class AuthenticationService{
     getToken(): string{
         return this.token;
     }
-    login(user:User): Observable<User>{
-        return this.http.post<User>(API_URL + "/api/auth/login", user, {
-            withCredentials:true
-        });
+    login(username:string, password:string): Observable<any>{
+
+        const credentials = btoa(username + ':' + password);
+        const headers = new HttpHeaders().set('Authorization', `Basic ${credentials}`)
+                                         .set('responseType',  'text');
+
+        return this.http.post<any>(API_URL + "/login", {}, { headers });    
     }
 
 }

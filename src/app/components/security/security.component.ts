@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-security',
@@ -18,8 +18,8 @@ export class SecurityComponent implements OnInit{
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(6)]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 
@@ -28,10 +28,13 @@ export class SecurityComponent implements OnInit{
   }
 
   onSubmitLoginForm():void{
-    this.authenService.login(this.loginForm.value).pipe(
-      tap( (r) => {
-        console.log(r );
-      })
+    const data = this.loginForm.value
+    this.authenService.login(data.username, data.password).pipe(
+     tap((token) =>{
+
+     // console.log(token);
+      localStorage.setItem('token', token);
+     })
     ).subscribe();
   }
 

@@ -2,13 +2,13 @@
     <form [formGroup]="loginForm">
         <div class="mt-2 mb-4">
             <label for="email" class="form-label">Email address :</label>
-            <input type="email" class="form-control" id="email" formControlName="email">
+            <input type="email" class="form-control" id="email" formControlName="username">
         </div>
 
         <div class="my-4">
             <label for="password" class="form-label">Password :</label>
             <div class="input-group">
-                <input type="password" class="form-control"  id="password" name="password" required  [type]="isPasswordVisible ? 'text' : 'password'" >
+                <input class="form-control"  id="password" formControlName="password" required  [type]="isPasswordVisible ? 'text' : 'password'" >
                 <button class="btn btn-info ms-1 rounded-0" (click)="onTogglePasswordVisibility()">{{ isPasswordVisible ? 'Cacher' : 'Afficher' }}</button>
             </div>
         </div>
