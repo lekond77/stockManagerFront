@@ -10,9 +10,11 @@
             <a class="nav-link active" aria-current="page" routerLink="/produits" routerLinkActive="active">Produits</a>
           </li>
         </ul>
-        <button class="btn btn-outline-dark me-2">   
+
+        <button class="btn btn-outline-dark me-2"  *ngIf="!user; else userTemplate">
           <a class="nav-link active" aria-current="page" routerLink="/login" routerLinkActive="active">Login</a>
         </button>
+
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         </form>
@@ -20,3 +22,14 @@
     </div>
   </nav>
 
+
+ <ng-template #userTemplate>  
+  <div class="dropdown">
+    <button class="btn btn-outline-dark me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Bonjour, {{ user }}! 
+    </button>
+    <div class="dropdown-menu">
+     <button class="dropdown-item btn btn-danger" (click)="deconnexion()">Deconnexion</button>
+    </div>
+  </div>
+</ng-template>

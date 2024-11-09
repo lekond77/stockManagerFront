@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { API_URL } from "../config/api.url.config";
-import { User } from "../model/user";
 
 
 @Injectable({
@@ -10,19 +9,20 @@ import { User } from "../model/user";
 })
 export class AuthenticationService{
 
-    private token = 'token';
+
+    public isUserLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false); 
+
     constructor(private http: HttpClient){}
-    
-    getToken(): string{
-        return this.token;
-    }
-    login(username:string, password:string): Observable<any>{
+
+    login(username:string, password:string): Observable<string>{
 
         const credentials = btoa(username + ':' + password);
-        const headers = new HttpHeaders().set('Authorization', `Basic ${credentials}`)
-                                         .set('responseType',  'text');
-
-        return this.http.post<any>(API_URL + "/login", {}, { headers });    
+        const headers = new HttpHeaders().set('Authorization', `Basic ${credentials}`);
+                                    
+        return this.http.post<string>(API_URL + "/login", {}, { headers, responseType: 'text' as 'json'});    
     }
-
+    getUserName(token:string){
+      
+    }
+    
 }

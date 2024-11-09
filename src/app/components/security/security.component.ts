@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { map, tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-security',
@@ -13,7 +14,7 @@ export class SecurityComponent implements OnInit{
   loginForm!:FormGroup;
   isPasswordVisible: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private authenService: AuthenticationService){}
+  constructor(private formBuilder: FormBuilder, private authenService: AuthenticationService , private router: Router){}
 
 
   ngOnInit(): void {
@@ -31,10 +32,16 @@ export class SecurityComponent implements OnInit{
     const data = this.loginForm.value
     this.authenService.login(data.username, data.password).pipe(
      tap((token) =>{
-
-     // console.log(token);
       localStorage.setItem('token', token);
-     })
+      localStorage.setItem('user', data.username);
+
+      this.authenService.isUserLoggedIn$.next(true);
+      
+      this.router.navigate(['/produits']);
+     }),
+     catchError((error) =>{
+      return error;
+    })
     ).subscribe();
   }
 
