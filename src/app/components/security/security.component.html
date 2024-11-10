@@ -1,4 +1,6 @@
 <div class="shadow-sm p-3 mt-4 col col-md-6 mx-auto">
+    <div *ngIf="errorMessage" class="alert alert-danger"> {{ errorMessage }} </div>
+    
     <form [formGroup]="loginForm">
         <div class="mt-2 mb-4">
             <label for="email" class="form-label">Email address :</label>

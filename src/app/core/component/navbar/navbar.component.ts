@@ -23,7 +23,10 @@ export class NavbarComponent implements OnInit{
   }
 
   setUserName():void{
-    this.user =  localStorage.getItem('user');
+    const userStored =  localStorage.getItem('user');
+    if(userStored){
+      this.user = userStored.split('@')[0];
+    }
   }
 
   deconnexion(){

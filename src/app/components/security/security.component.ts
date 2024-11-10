@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-security',
@@ -13,6 +14,7 @@ export class SecurityComponent implements OnInit{
 
   loginForm!:FormGroup;
   isPasswordVisible: boolean = false;
+  errorMessage!: string;
 
   constructor(private formBuilder: FormBuilder, private authenService: AuthenticationService , private router: Router){}
 
@@ -40,7 +42,8 @@ export class SecurityComponent implements OnInit{
       this.router.navigate(['/produits']);
      }),
      catchError((error) =>{
-      return error;
+      this.errorMessage = error;
+      return of (null);
     })
     ).subscribe();
   }

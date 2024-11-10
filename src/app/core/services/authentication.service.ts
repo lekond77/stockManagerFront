@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { API_URL } from "../config/api.url.config";
+import { catchError, throwError } from "rxjs";
 
 
 @Injectable({
@@ -19,7 +20,11 @@ export class AuthenticationService{
         const credentials = btoa(username + ':' + password);
         const headers = new HttpHeaders().set('Authorization', `Basic ${credentials}`);
                                     
-        return this.http.post<string>(API_URL + "/login", {}, { headers, responseType: 'text' as 'json'});    
+        return this.http.post<string>(API_URL + "/login", {}, { headers, responseType: 'text' as 'json'}).pipe(
+            catchError(() => { 
+                return throwError(() => new Error('Invalid credentials'));
+            })
+        );    
     }
     getUserName(token:string){
       
