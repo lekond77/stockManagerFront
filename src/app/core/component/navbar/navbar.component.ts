@@ -24,9 +24,8 @@ export class NavbarComponent implements OnInit{
 
   setUserName():void{
     const userStored =  localStorage.getItem('user');
-    if(userStored){
-      this.user = userStored.split('@')[0];
-    }
+
+    this.user = userStored ? userStored.split('@')[0] : null;
   }
 
   deconnexion(){
