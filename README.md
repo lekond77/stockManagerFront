@@ -1,27 +1,39 @@
-# Stocmanager
+# Frontend (Angular) - StockManager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+## Description
 
-## Development server
+This is the Frontend part of the StockManager application, built using Angular. 
+It allows users to interact with the backend to manage products in the inventory. 
+The application provides a user-friendly interface to display the list of products, show product details, update product information,  and delete products 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Configuration
 
-## Code scaffolding
+API Base URL: The frontend communicates with the backend (Spring Boot API) at the URL http://localhost:8085. Make sure the backend is running on that URL. 
+You can configure API endpoints in the : **/src/app/core/config/api.url.config.ts**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Clone the repository
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+git clone https://github.com/lekond77/stockManagerFront.git
 
-## Running unit tests
+Appi repository available here : https://github.com/lekond77/stockManagerBack
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Description
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Ceci est la partie Frontend de l'application StockManager, réalisée avec Angular.
+Elle permet aux utilisateurs d'interagir avec le backend pour gérer les produits dans l'inventaire.
+L'application fournit une interface conviviale pour afficher la liste des produits, afficher les détails d'un produit, mettre à jour les informations d'un produit et supprimer des produits.
 
-## Further help
+## Configuration
+URL de base de l'API : Le frontend communique avec le backend (API Spring Boot) à l'URL http://localhost:8085.
+Assurez-vous que le backend est bien en cours d'exécution à cette URL.
+Vous pouvez configurer les endpoints de l'API dans le fichier : /src/app/core/config/api.url.config.ts
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Cloner le dépôt
+git clone https://github.com/lekond77/stockManagerFront.git
+
+Le dépôt de l'API est disponible ici : https://github.com/lekond77/stockManagerBac
+
+![stockManager](image.png)
+
