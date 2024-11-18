@@ -26,6 +26,11 @@ export class AuthenticationService{
             })
         );    
     }
+
+    logout(){
+        
+        return this.http.post<any>(API_URL + "/logout", {});
+    }
     getUserName(token:string){
       
     }

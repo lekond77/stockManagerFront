@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit{
   action:string = "add";
   actionText:string = "Ajouter";
   modalStyle:string = "d-none";
+  errorMessage!:string;
 
   selectedProduct!:Product;
   constructor(private productService: ProductService, private formBulder: FormBuilder,  private router: Router){
@@ -91,6 +92,10 @@ export class ProductComponent implements OnInit{
         this.products$ = this.products$.pipe(
           map(products => [...products])
         )
+      }),
+      catchError((error) =>{
+        this.errorMessage = "Une erreur s'est produite !";
+        return of (null);
       })
     ).subscribe();
   }

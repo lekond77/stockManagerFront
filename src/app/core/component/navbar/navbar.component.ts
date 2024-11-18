@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit{
   }
 
   deconnexion(){
+    //.authenService.logout();
     localStorage.clear();
     this.authenService.isUserLoggedIn$.next(false);
     this.router.navigate(['']);
