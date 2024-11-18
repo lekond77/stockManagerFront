@@ -14,7 +14,7 @@ You can configure API endpoints in the : **/src/app/core/config/api.url.config.t
 
 ## Clone the repository
 
-git clone https://github.com/lekond77/stockManagerFront.git
+    git clone https://github.com/lekond77/stockManagerFront.git
 
 Appi repository available here : https://github.com/lekond77/stockManagerBack
 
@@ -31,7 +31,7 @@ Assurez-vous que le backend est bien en cours d'exécution à cette URL.
 Vous pouvez configurer les endpoints de l'API dans le fichier : /src/app/core/config/api.url.config.ts
 
 ## Cloner le dépôt
-git clone https://github.com/lekond77/stockManagerFront.git
+    git clone https://github.com/lekond77/stockManagerFront.git
 
 Le dépôt de l'API est disponible ici : https://github.com/lekond77/stockManagerBack
 
