@@ -33,7 +33,7 @@ Vous pouvez configurer les endpoints de l'API dans le fichier : /src/app/core/co
 ## Cloner le dépôt
 git clone https://github.com/lekond77/stockManagerFront.git
 
-Le dépôt de l'API est disponible ici : https://github.com/lekond77/stockManagerBac
+Le dépôt de l'API est disponible ici : https://github.com/lekond77/stockManagerBack
 
 ![stockManager](image.png)
 
